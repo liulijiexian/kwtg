@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, url_for, redirect
-from music_code import Controller
+from api.music_code import Controller
 import json
 
 app = Flask(__name__)
