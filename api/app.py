@@ -1,8 +1,6 @@
 from flask import Flask, request, render_template, url_for, redirect
-from project_code.music_code import Controller
+from music_code import Controller
 import json
-import sys
-sys.path.append('./project_code')
 
 app = Flask(__name__)
 c = Controller()
