@@ -1,0 +1,15 @@
+{
+    "builds": [
+      {
+        "src": "/api/app.py",
+        "use": "@vercel/python"
+      }
+    ],
+  "rewrites": [
+      {
+          "source": "/app/(.*)",
+          "destination": "/api/app.py"
+      }
+  ],
+  "trailingSlash": true
+}
