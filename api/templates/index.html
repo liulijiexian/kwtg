@@ -221,11 +221,10 @@
                         //显示到页面
                         t = t + '<p class="label-select-activate" onclick="lrcbof(' + lyric[i]['time'] + ')">' + lyric[i]['lineLyric'] + '</p>';
                     }
-                    if (t == '') {
-                        t = '应版权方要求，暂无法提供此歌词服务'
-                    }
                     lyricContainer.innerHTML = t;
                     FF();
+                } else {
+                    lyricContainer.innerHTML = '应版权方要求，暂无法提供此歌词服务';
                 }
             })
         }
