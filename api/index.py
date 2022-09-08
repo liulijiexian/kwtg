@@ -5,7 +5,7 @@ import json
 app = Flask(__name__)
 c = Controller()
 
-@app.route('/app/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():  # put application's code here
     return render_template('index.html')
 
@@ -23,7 +23,7 @@ def getMusic():  # put application's code here
         return render_template('content.html', content=content, key=key, pn=int(pn), rn=rn)
     return render_template('content.html', content=[], key=key, pn=int(pn), rn=rn)
 
-@app.route('/app/getMusicUrl/', methods=['GET'])
+@app.route('/getMusicUrl/', methods=['GET'])
 def getMusicUrl():  # put application's code here
     rid = request.args.get('rid')
 
@@ -33,7 +33,7 @@ def getMusicUrl():  # put application's code here
     return json.dumps({'url': '', 'status': 404})
 
 
-@app.route('/app/getMusicMainLrc/', methods=['GET'])
+@app.route('/getMusicMainLrc/', methods=['GET'])
 def getMusicMainLrc():
     musicId = request.args.get('musicId')
 
@@ -42,8 +42,9 @@ def getMusicMainLrc():
         return json.dumps({'lrclist': lrclist, 'status': 200})
     return json.dumps({'lrclist': '', 'status': 404})
 
-# 
-# if __name__ == '__main__':
+
+if __name__ == '__main__':
+    app.run()
 #     app.run(debug=True,
 #             host='0.0.0.0',
 #             port=5000,
