@@ -1,9 +1,6 @@
 {
-  "rewrites": [
-      {
-          "source": "/app/(.*)",
-          "destination": "/api/app.py"
-      }
+  "routes": [
+    { "src": "/.*", "dest": "/api/index.py"}
   ],
   "trailingSlash": true
 }
