@@ -19,7 +19,7 @@
         /** 搜索，传给iframe */
         function sub() {
             const data = document.getElementById('data').value;
-            const url = '/getMusicMain?key=' + data + '&pn=1&rn=30';
+            const url = '/getMusicMain/?key=' + data + '&pn=1&rn=30';
             document.getElementById('content').src = url;
 
             parenttestblock();
@@ -76,7 +76,7 @@
                 gqget();
             }
 
-            axios.get('/getMusicUrl?rid=' + rid, {
+            axios.get('/getMusicUrl/?rid=' + rid, {
                 /* 存储这一次请求 */
                 cancelToken: new axios.CancelToken(function(e) {
                     gqget = e;
@@ -190,7 +190,7 @@
         function lrclist(musicId) {
             F = false;
             const lyricContainer = document.getElementById('lyricContainer');
-            const url = '/getMusicMainLrc?musicId=' + musicId;
+            const url = '/getMusicMainLrc/?musicId=' + musicId;
 
             if (typeof gcget ==='function') {
                 /* 取消上一次发送歌词的请求 */
