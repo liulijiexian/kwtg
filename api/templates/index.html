@@ -160,7 +160,7 @@
 
             }
             if (t == '') {
-                t = '应版权方要求，暂无法在当前国家或地区提供此歌曲服务'
+                t = '应版权方要求，暂无法此歌曲服务'
             }
             document.getElementById('select_music').innerHTML = t;
         }
@@ -220,6 +220,9 @@
                     for (let i = 0; i < lyric.length; i++) {
                         //显示到页面
                         t = t + '<p class="label-select-activate" onclick="lrcbof(' + lyric[i]['time'] + ')">' + lyric[i]['lineLyric'] + '</p>';
+                    }
+                    if (t == '') {
+                        t = '应版权方要求，暂无法提供此歌词服务'
                     }
                     lyricContainer.innerHTML = t;
                     FF();
