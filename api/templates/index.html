@@ -121,6 +121,13 @@
             if (mlist === undefined) {
                 mlist = [];
             }
+            
+            for (let ii = 0; ii < mlist.length; ii++) {
+                if (mlist[ii].url == content.url) {
+                    mlist.splice(ii, 1);
+                    break;
+                }
+            }
             mlist.push(content);
             i = mlist.length - 1;
 
@@ -151,6 +158,9 @@
                     t = t + '<option class="gedan" value ="' + ii + '">' + mlist[ii].name + '\t---\t' + mlist[ii].author + '\t---\t' + mlist[ii].time + '</option>'
                 }
 
+            }
+            if (t == '') {
+                t = '应版权方要求，暂无法在当前国家或地区提供此歌曲服务'
             }
             document.getElementById('select_music').innerHTML = t;
         }
