@@ -227,6 +227,9 @@
                     lyricContainer.innerHTML = '应版权方要求，暂无法提供此歌词服务';
                 }
             })
+            .catch((error) => {
+                lyricContainer.innerHTML = '应版权方要求，暂无法提供此歌词服务';
+            })
         }
 
         /** 歌曲和歌词同步 */
