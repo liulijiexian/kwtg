@@ -5,6 +5,5 @@
   
   "routes": [
     { "src": "/(.*)", "dest": "api/index.py" }
-  ],
-  "trailingSlash": true
+  ]
 }
