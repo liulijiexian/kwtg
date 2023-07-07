@@ -1,6 +1,6 @@
 import requests
 import copy
-
+import hashlib  # md5加密
 
 ''' 公共请求头  '''
 class Headers:
@@ -72,6 +72,11 @@ class MusicList(Headers):
         headers['csrf'] = kw_token
         headers['Cookie'] = 'kw_token=' + str(kw_token)
         headers['Referer'] = req.url
+        hl=hashlib.md5()
+        hl.update(kw_token.encode(encoding='utf8'))
+        md5=hl.hexdigest()
+        headers['Cross'] = str(md5)
+        
         self.upheaders(**headers)
 
         return self.__session.get(self.__url, params=self.__params, headers=self.__headers, **keyword).json()['data']['list']
