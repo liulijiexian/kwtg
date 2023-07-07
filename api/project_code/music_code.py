@@ -5,7 +5,8 @@ import hashlib  # md5加密
 ''' 公共请求头  '''
 class Headers:
     headers = {
-        'UserAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36',
+        'Host': 'www.kuwo.cn',
     }
 
     session = requests.session()
@@ -60,17 +61,20 @@ class MusicList(Headers):
 
         self.__session = self.session
 
+  
 
     def get(self, key, pn=1, rn=30, **keyword):
         self.upkey(key, pn, rn)
 
         # 获取kw_token，反反爬措施
         req = self.__session.get(f'http://www.kuwo.cn/search/list?key={key}', headers=self.__headers)
-        kw_token = req.cookies.get('kw_token')
+        kw_token = req.cookies.get('Hm_token')
+        # kw_token = req.cookies.get('kw_token')
         headers = {}
 
-        headers['csrf'] = kw_token
-        headers['Cookie'] = 'kw_token=' + str(kw_token)
+        headers['CSRF'] = kw_token
+        headers['Cookie'] = 'Hm_token=' + str(kw_token)
+        # headers['Cookie'] = 'kw_token=' + str(kw_token)
         headers['Referer'] = req.url
         hl=hashlib.md5()
         hl.update(kw_token.encode(encoding='utf8'))
@@ -78,7 +82,7 @@ class MusicList(Headers):
         headers['Cross'] = str(md5)
         
         self.upheaders(**headers)
-
+        
         return self.__session.get(self.__url, params=self.__params, headers=self.__headers, **keyword).json()['data']['list']
 
     # 更新key
@@ -118,7 +122,7 @@ class Controller:
             musicDict['musicimage'] = str(i['albumpic'])  # 歌曲图像
             musicDict['name'] = str(i['name']).strip().replace('&nbsp;', ' ')  # 歌名
             musicDict['author'] = str(i['artist']).strip().replace('&nbsp;', ' ')  # 作者
-            # musicDict['url'] = self.getMusicMain(i['rid'])  # 音乐url
+            # musicDict['url'] = self.getMusicMain(i['rid'])  # 音乐url（一次性访问太多 酷我音乐 容易失败）
             musicDict['url'] = i['rid']  # 音乐url
             musicDict['time'] = str(i['songTimeMinutes']).strip().replace('&nbsp;', ' ')  # 时长
 
@@ -140,3 +144,7 @@ class Controller:
         else:
             lrclist = self.__getMusic.getlrc(mid)['data']['lrclist']
         return lrclist
+
+if __name__ == "__main__":
+    controller = Controller()
+    print(controller.musicListMain(key='许嵩'))
