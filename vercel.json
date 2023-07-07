@@ -3,7 +3,7 @@
     {"src": "api/index.py", "use": "@vercel/python" }
   ],
   
-  "rewrites": [
+  "routes": [
     { "src": "/(.*)", "dest": "api/index.py" }
   ],
   "trailingSlash": true
